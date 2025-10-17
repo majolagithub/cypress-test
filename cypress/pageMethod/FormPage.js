@@ -4,7 +4,68 @@ import { FormPageElement } from "../pageElement/FormPageElement";
 export class FormPage {
     element = new FormPageElement();
 
-    // type into input field - improved version
+    selectFacilityByName = (facilityName) => {
+        cy.log(`Selecting facility: ${facilityName}`);
+        cy.get(this.element.selectFacilityDropdown, { timeout: 10000 })
+          .should('be.visible')
+          .click();
+
+        cy.contains('option', facilityName, { timeout: 10000 })
+          .should('be.visible')
+          .click();
+
+        cy.log(`Selected facility: ${facilityName}`);
+    }
+
+    selectHousingCategory = (category) => {
+        cy.log(`Selecting housing category: ${category}`);
+        cy.get(this.element.selectHousingCategoryButton, { timeout: 10000 })
+          .should('be.visible')
+          .click();
+
+        cy.get(`option[value="${category}"]`, { timeout: 10000 })
+          .parent('select')
+          .select(category);
+
+        cy.log(`Selected housing category: ${category}`);
+    }
+
+    selectLivingOptionByValue = (option) => {
+        cy.log(`Selecting living option: ${option}`);
+        cy.get(this.element.selectLivingOptionButton, { timeout: 10000 })
+          .should('be.visible')
+          .click();
+
+        cy.get(`option[value="${option}"]`, { timeout: 10000 })
+          .parent('select')
+          .select(option);
+
+        cy.log(`Selected living option: ${option}`);
+    }
+
+    setDateOfBirth = (dateString) => {
+        cy.log(`Setting date of birth: ${dateString}`);
+        cy.get(this.element.dateOfBirthButton, { timeout: 10000 })
+          .should('be.visible')
+          .click();
+
+        cy.wait(500);
+        //for typing directly:
+        // cy.get(this.element.dateOfBirthInput).type(dateString);
+        cy.log(`✅ Date of birth set`);
+    }
+
+    fillInitialSelections = (facilityName, housingCategory, livingOption, dateOfBirth) => {
+        cy.log('=== Filling Initial Form Selections ===');
+
+        if (facilityName) this.selectFacilityByName(facilityName);
+        if (housingCategory) this.selectHousingCategory(housingCategory);
+        if (livingOption) this.selectLivingOptionByValue(livingOption);
+        if (dateOfBirth) this.setDateOfBirth(dateOfBirth);
+
+        cy.log('✅ Initial selections complete');
+    }
+
     enterTextField = (element, fieldValue) => {
         if (fieldValue === undefined || fieldValue === null) {
             throw new Error(`Field value is undefined for element: ${element}`);
@@ -35,7 +96,6 @@ export class FormPage {
           .click({ force: true });
     }
 
-    // Improved method for custom checkboxes/buttons
     checkCheckbox = (selector) => {
         cy.log(`Checking checkbox/button: ${selector}`);
         cy.get(selector)
@@ -46,7 +106,6 @@ export class FormPage {
           .should('have.attr', 'aria-checked', 'true');
     }
 
-    // Handle Radix UI checkboxes
     checkRadixCheckbox = (checkboxSelector) => {
         if (checkboxSelector === undefined || checkboxSelector === null) {
             throw new Error(`Checkbox selector is undefined!`);
@@ -178,21 +237,6 @@ export class FormPage {
                 });
             }
         }
-
-        // if (needBathing) {
-        //     cy.log('Checking Bathing Assistance checkbox');
-        //     cy.get(this.element.bathingCheckbox)
-        //         .scrollIntoView()
-        //         .click({ force: true });
-
-        //     if (bathingDesc) {
-        //         cy.log('Typing bathing description');
-        //         cy.get(this.element.bathingDescribe, { timeout: 20000 })
-        //             .should('exist')
-        //             .should('be.visible')
-        //             .type(bathingDesc);
-        //     }
-        // }
     }
 
     fillFinancialManagement = (canDoMyself, needHelp, someoneManages) => {
@@ -212,23 +256,12 @@ export class FormPage {
 
     fillPreviousCareHistory = (previouslyTaken, facilityName, facilityContact, leavingReason) => {
         cy.log('Filling Previous Care History Section');
-        
         if (previouslyTaken) {
             this.checkRadixCheckbox(this.element.previouslyTakenYes);
             cy.wait(500);
-            
-            if (facilityName) {
-                cy.log('Filling facility name');
-                this.enterFormFieldValue(this.element.facilityName, facilityName);
-            }
-            if (facilityContact) {
-                cy.log('Filling facility contact');
-                this.enterFormFieldValue(this.element.facilityContact, facilityContact);
-            }
-            if (leavingReason) {
-                cy.log('Filling leaving reason');
-                this.enterFormFieldValue(this.element.leavingReason, leavingReason);
-            }
+            if (facilityName) this.enterFormFieldValue(this.element.facilityName, facilityName);
+            if (facilityContact) this.enterFormFieldValue(this.element.facilityContact, facilityContact);
+            if (leavingReason) this.enterFormFieldValue(this.element.leavingReason, leavingReason);
         } else {
             this.checkRadixCheckbox(this.element.previouslyTakenNo);
         }
@@ -238,9 +271,7 @@ export class FormPage {
         cy.log('Accepting all declarations');
         cy.get('button[id^="decl-"]').each(($checkbox) => {
             const isChecked = $checkbox.attr('aria-checked') === 'true' || $checkbox.attr('data-state') === 'checked';
-            if (!isChecked) {
-                cy.wrap($checkbox).scrollIntoView().click({ force: true });
-            }
+            if (!isChecked) cy.wrap($checkbox).scrollIntoView().click({ force: true });
         });
     }
 
@@ -253,12 +284,7 @@ export class FormPage {
 
     submitForm = (sendCopy = false) => {
         cy.log('Submitting form');
-        
-        if (sendCopy) {
-            cy.log('Checking Send Copy to Email');
-            this.checkRadixCheckbox(this.element.sendCopyCheckbox);
-        }
-        
+        if (sendCopy) this.checkRadixCheckbox(this.element.sendCopyCheckbox);
         cy.get(this.element.submitButton, { timeout: 10000 })
           .scrollIntoView()
           .should('be.visible')

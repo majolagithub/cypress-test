@@ -38,6 +38,16 @@ describe('Form Submission Test', () => {
         // Wait for form to be ready (adjust selector as needed)
         cy.get('form', { timeout: 10000 }).should('be.visible');
 
+
+         //Fill initial selections first
+        cy.log('=== Filling Initial Selections ===');
+        formPage.fillInitialSelections(
+            formData.facilityNameSelection,
+            formData.housingCategory,
+            formData.livingOption,
+            formData.dateOfBirth
+        );
+
         // Fill Basic Information
         cy.log('=== Filling Basic Information ===');
         formPage.fillBasicInfo(
