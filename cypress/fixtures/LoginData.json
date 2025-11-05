@@ -1,0 +1,46 @@
+{
+  "validUser": {
+    "email": "majolathabiso657@gmail.com",
+    "password": "Badisa123",
+    "description": "Main test user account"
+  },
+  "alternativeUser": {
+    "email": "testuser@example.com",
+    "password": "TestPass123!",
+    "description": "Alternative test account"
+  },
+  "invalidUser": {
+    "email": "invalid@example.com",
+    "password": "WrongPassword123",
+    "description": "Invalid credentials for negative testing"
+  },
+  "emptyCredentials": {
+    "email": "",
+    "password": "",
+    "description": "Empty fields for validation testing"
+  },
+  "invalidEmailFormat": {
+    "email": "notanemail",
+    "password": "SomePassword123",
+    "description": "Invalid email format"
+  },
+  "urls": {
+    "loginPage": "https://app.mybadisa.org/en/login",
+    "forgotPasswordPage": "https://app.mybadisa.org/en/auth/forgot-password",
+    "afterLoginRedirect": "/waitlist",
+    "dashboardPage": "/dashboard",
+    "medicalFormPage": "/medical-form"
+  },
+  "testScenarios": {
+    "sqlInjection": {
+      "email": "admin' OR '1'='1",
+      "password": "password",
+      "description": "SQL injection attempt"
+    },
+    "xss": {
+      "email": "<script>alert('xss')</script>@test.com",
+      "password": "password",
+      "description": "XSS attempt"
+    }
+  }
+}

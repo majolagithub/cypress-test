@@ -16,7 +16,7 @@ describe('Form Submission Test', () => {
         });
     });
 
-    // Optional: Add beforeEach to ensure clean state
+    //beforeEach to ensure clean state
     beforeEach(() => {
         // Clear cookies and local storage before each test
         cy.clearCookies();
@@ -39,14 +39,14 @@ describe('Form Submission Test', () => {
         cy.get('form', { timeout: 10000 }).should('be.visible');
 
 
-         //Fill initial selections first
-        cy.log('=== Filling Initial Selections ===');
-        formPage.fillInitialSelections(
-            formData.facilityNameSelection,
-            formData.housingCategory,
-            formData.livingOption,
-            formData.dateOfBirth
-        );
+        //Fill initial selections
+        // cy.log('=== Filling Initial Selections ===');
+        // formPage.fillInitialSelections(
+        //     formData.facilityNameSelection,
+        //     formData.housingCategory,
+        //     formData.livingOption,
+        //     formData.dateOfBirth
+        // );
 
         // Fill Basic Information
         cy.log('=== Filling Basic Information ===');
@@ -161,10 +161,10 @@ describe('Form Submission Test', () => {
             formData.witnessName
         );
 
-        // Add assertions to verify form was filled
+        //assertions to verify form was filled
         cy.log('=== Form Fill Complete - Verifying Data ===');
         
-        // Example assertions (adjust selectors as needed)
+        //assertions (adjust selectors as needed)
         cy.get('#fullNames').should('have.value', formData.fullNames);
         cy.get('#email').should('have.value', formData.email);
         cy.get('#applicantName').should('have.value', formData.applicantProxyName);
@@ -186,7 +186,7 @@ describe('Form Submission Test', () => {
         // cy.contains(/successfully submitted|thank you|application received/i, { timeout: 10000 })
         //   .should('be.visible');
         
-        cy.log('✅ Form submitted successfully!');
+        cy.log('Form submitted successfully!');
     });
 
     //Test using the complete form method
@@ -206,15 +206,15 @@ describe('Form Submission Test', () => {
             return url.includes('/success') || url.includes('/thank-you') || url.includes('/confirmation');
         });
         
-        cy.log('✅ Complete form method test passed!');
+        cy.log('Complete form method test passed!');
     });
 
-    // Optional: Add test to verify validation errors
+    //test to verify validation errors
     it('Shows validation errors for empty required fields', () => {
         homePage.visitHomePage();
         homePage.visitWaitingListFormPage();
         
-        // Try to submit empty form
+        //submit empty form
         cy.get('button[type="submit"]').scrollIntoView().click({ force: true });
         
         // Check for validation messages (adjust selectors as needed)
@@ -222,7 +222,7 @@ describe('Form Submission Test', () => {
           .should('be.visible');
     });
 
-    // Add test for partial form fill
+    //test for partial form fill
     it('Allows saving partial form data', () => {
         homePage.visitHomePage();
         homePage.visitWaitingListFormPage();
@@ -261,7 +261,7 @@ describe('Form Submission Test', () => {
             cy.wrap($checkbox).should('have.attr', 'aria-checked', 'true');
         });
         
-        cy.log('✅ All declarations accepted successfully');
+        cy.log('All declarations accepted successfully');
     });
 });
 

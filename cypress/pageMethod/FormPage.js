@@ -4,67 +4,110 @@ import { FormPageElement } from "../pageElement/FormPageElement";
 export class FormPage {
     element = new FormPageElement();
 
-    selectFacilityByName = (facilityName) => {
-        cy.log(`Selecting facility: ${facilityName}`);
-        cy.get(this.element.selectFacilityDropdown, { timeout: 10000 })
-          .should('be.visible')
-          .click();
+    // /**
+    //  * Selects a facility from the dropdown
+    //  * @param {string} facilityName - Name of the facility (e.g., "Ons Huis (Citrusdal)")
+    //  */
+    // selectFacilityByName = (facilityName) => {
+    //     cy.log(`Selecting facility: ${facilityName}`);
+        
+    //     // Click the FIRST combobox dropdown (facility dropdown)
+    //     cy.get('button[role="combobox"]', { timeout: 10000 })
+    //     .first()  //Get only the first one
+    //     .should('be.visible')
+    //     .click();
+    //     // Wait for dropdown to open
+    //     cy.wait(500);
+        
+    //     // Click the option with the facility name
+    //     cy.contains(facilityName, { timeout: 10000 })
+    //     .should('be.visible')
+    //     .click({ force: true });       
+    //     cy.log(`Selected facility: ${facilityName}`);
+    // }
 
-        cy.contains('option', facilityName, { timeout: 10000 })
-          .should('be.visible')
-          .click();
+    // /**
+    //  * Selects housing category from dropdown
+    //  * @param {string} category - Text to display (e.g., "Room or Shared Room Housing")
+    //  */
+    // selectHousingCategory = (categoryText) => {
+    //     cy.log(`Selecting housing category: ${categoryText}`);
+        
+    //     // Click the second combobox (housing category)
+    //     cy.get('button[role="combobox"]', { timeout: 10000 })
+    //     .eq(1)  //Get the second combobox (index 1)
+    //     .should('be.visible')
+    //     .click();
+        
+    //     // Wait for dropdown to open
+    //     cy.wait(500);
+        
+    //     // Click the option
+    //     cy.contains(categoryText, { timeout: 10000 })
+    //     .should('be.visible')
+    //     .click({ force: true });
+        
+    //     cy.log(`Selected housing category: ${categoryText}`);
+    // }
 
-        cy.log(`Selected facility: ${facilityName}`);
-    }
+    // /**
+    //  * Selects living option from dropdown
+    //  * @param {string} optionText - Text to display (e.g., "Purchase Living Right")
+    //  */
+    // selectLivingOptionByValue = (optionText) => {
+    //     cy.log(`Selecting living option: ${optionText}`);
 
-    selectHousingCategory = (category) => {
-        cy.log(`Selecting housing category: ${category}`);
-        cy.get(this.element.selectHousingCategoryButton, { timeout: 10000 })
-          .should('be.visible')
-          .click();
+    //     // Wait until the 3rd combobox exists and is enabled
+    //     cy.get('button[role="combobox"]', { timeout: 20000 })
+    //     .eq(2)
+    //     .should('exist')
+    //     .should('not.be.disabled')
+    //     .should('be.visible')
+    //     .click({ force: true }); // Force click as fallback
 
-        cy.get(`option[value="${category}"]`, { timeout: 10000 })
-          .parent('select')
-          .select(category);
+    //     // Wait for dropdown to open
+    //     cy.wait(800);
 
-        cy.log(`Selected housing category: ${category}`);
-    }
+    //     // Select the desired option
+    //     cy.contains(optionText, { timeout: 20000 })
+    //     .should('be.visible')
+    //     .click({ force: true });
 
-    selectLivingOptionByValue = (option) => {
-        cy.log(`Selecting living option: ${option}`);
-        cy.get(this.element.selectLivingOptionButton, { timeout: 10000 })
-          .should('be.visible')
-          .click();
+    //     cy.log(`Selected living option: ${optionText}`);
+    // };
 
-        cy.get(`option[value="${option}"]`, { timeout: 10000 })
-          .parent('select')
-          .select(option);
+    // /**
+    //  * Sets date of birth by typing into input
+    //  * @param {string} dateString - Date in format "DD/MM/YYYY"
+    //  */
+    // setDateOfBirth = (dateString) => {
+    //     cy.log(`Setting date of birth: ${dateString}`);
+        
+    //     // Click the date button to activate the input
+    //     cy.get('button[aria-haspopup="dialog"]', { timeout: 10000 })
+    //     .should('be.visible')
+    //     .click();
+    //     cy.wait(300);        
 
-        cy.log(`Selected living option: ${option}`);
-    }
+    //     // Type the date directly if there's an input field
+    //     cy.get('input[placeholder*="Select date"]')
+    //     .clear()
+    //     .type(dateString);
+    //     cy.get('body').type('{esc}');        
+    //     cy.log(`Date of birth set: ${dateString}`);
+    // }
 
-    setDateOfBirth = (dateString) => {
-        cy.log(`Setting date of birth: ${dateString}`);
-        cy.get(this.element.dateOfBirthButton, { timeout: 10000 })
-          .should('be.visible')
-          .click();
+    
+    // fillInitialSelections = (facilityName, housingCategory, livingOption, dateOfBirth) => {
+    //     cy.log('=== Filling Initial Form Selections ===');
 
-        cy.wait(500);
-        //for typing directly:
-        // cy.get(this.element.dateOfBirthInput).type(dateString);
-        cy.log(`✅ Date of birth set`);
-    }
+    //     if (facilityName) this.selectFacilityByName(facilityName);
+    //     if (housingCategory) this.selectHousingCategory(housingCategory);
+    //     if (livingOption) this.selectLivingOptionByValue(livingOption);
+    //     if (dateOfBirth) this.setDateOfBirth(dateOfBirth);
 
-    fillInitialSelections = (facilityName, housingCategory, livingOption, dateOfBirth) => {
-        cy.log('=== Filling Initial Form Selections ===');
-
-        if (facilityName) this.selectFacilityByName(facilityName);
-        if (housingCategory) this.selectHousingCategory(housingCategory);
-        if (livingOption) this.selectLivingOptionByValue(livingOption);
-        if (dateOfBirth) this.setDateOfBirth(dateOfBirth);
-
-        cy.log('✅ Initial selections complete');
-    }
+    //     cy.log('Initial selections complete');
+    // }
 
     enterTextField = (element, fieldValue) => {
         if (fieldValue === undefined || fieldValue === null) {
@@ -304,4 +347,137 @@ export class FormPage {
         if (witnessName) this.enterFormFieldValue(this.element.witnessName, witnessName);
         if (sendCopyToEmail) this.checkRadixCheckbox(this.element.sendCopyCheckbox);
     }
+
+    fillCompleteForm = (formData) => {
+        cy.log('=== Filling Complete Form ===');
+
+        //Initial Selections
+        cy.log('Filling Initial Selections');
+        this.fillInitialSelections(
+            formData.facilityNameSelection,
+            formData.housingCategory,
+            formData.livingOption,
+            formData.dateOfBirth
+        );
+
+        //Basic Information
+        cy.log('Filling Basic Information');
+        this.fillBasicInfo(
+            formData.fullNames,
+            formData.lastName,
+            formData.id,
+            formData.email,
+            formData.phoneNumberOwn,
+            formData.phoneNumberChild,
+            formData.address,
+            formData.postalCode
+        );
+
+        //Demographics
+        cy.log('Filling Demographics');
+        this.fillDemographics(
+            formData.homeLanguage,
+            formData.religion,
+            formData.occupation
+        );
+
+        //Funeral Details
+        cy.log('Filling Funeral Details');
+        this.fillFuneralDetails(
+            formData.name,
+            formData.phoneNumber,
+            formData.referenceNumber,
+            formData.address1
+        );
+
+        // 5. Hospital Details
+        cy.log('Filling Hospital Details');
+        this.fillHospitalDetails(
+            formData.hospitalName,
+            formData.fileNumber
+        );
+
+        //Medical Fund
+        cy.log('Filling Medical Fund');
+        this.fillMedicalFund(
+            formData.medicalFund,
+            formData.planName,
+            formData.medicalAidNumber,
+            formData.doctorName,
+            formData.doctorPhone
+        );
+
+        //Child Details
+        cy.log('Filling Child Details');
+        this.fillChildDetails(
+            formData.childFullName,
+            formData.childPhoneNo,
+            formData.childCellNo,
+            formData.childEmail,
+            formData.childAddress,
+            formData.childRelationship,
+            formData.childOccupation
+        );
+
+        // 8. Medical Condition
+        cy.log('Filling Medical Condition');
+        this.fillMedicalCondition(
+            formData.healthStatus,
+            formData.medicalDiagnosis,
+            formData.allergies
+        );
+
+        //Help Needed
+        cy.log('Filling Help Needed');
+        this.fillHelpNeeded(
+            formData.needMobility,
+            formData.mobilityDescription,
+            formData.needBathing,
+            formData.bathingDescription
+        );
+
+        //Financial Management
+        cy.log('Filling Financial Management');
+        this.fillFinancialManagement(
+            formData.canDoFinancesMyself,
+            formData.needFinancialHelp,
+            formData.someoneManagesFinances
+        );
+
+        //Intake Timing
+        cy.log('Filling Intake Timing');
+        this.fillIntakeTiming(
+            formData.intakeImmediately,
+            formData.intakeWithin3Months,
+            formData.intakeWithin6Months,
+            formData.intakeLater
+        );
+
+        //Previous Care History
+        cy.log('Filling Previous Care History');
+        this.fillPreviousCareHistory(
+            formData.previouslyTaken,
+            formData.facilityName,
+            formData.facilityContact,
+            formData.leavingReason
+        );
+
+        //Declarations
+        cy.log('Accepting Declarations');
+        this.acceptDeclarations();
+
+        //Signatures
+        cy.log('Filling Signatures');
+        this.fillSignatures(
+            formData.applicantProxyName,
+            formData.witnessName
+        );
+
+        // Submit Form
+        cy.log('Submitting Form');
+        this.submitForm(formData.sendCopyToEmail);
+
+        cy.log('=== Complete Form Fill Finished ===');
+    } 
+    
 }

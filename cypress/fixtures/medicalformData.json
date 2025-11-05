@@ -1,0 +1,34 @@
+{
+  "doctorName": "Dr. Faith Smith",
+  "doctorEmail": "drfaith.smith@medical.com",
+  "contactNumber": "0123456789",
+  "clinicName": "Durban Medical Centre",
+  
+  "alternativeDoctor1": {
+    "doctorName": "Dr. John Ndlovu",
+    "doctorEmail": "john.ndlovu@healthclinic.co.za",
+    "contactNumber": "0823456789",
+    "clinicName": "Gateway Health Clinic"
+  },
+  
+  "alternativeDoctor2": {
+    "doctorName": "Dr. Sarah van der Merwe",
+    "doctorEmail": "sarah.vandermerwe@medicenter.co.za",
+    "contactNumber": "0765432198",
+    "clinicName": "Johannesburg Medical Center"
+  },
+  
+  "invalidData": {
+    "doctorName": "",
+    "doctorEmail": "invalidemail",
+    "contactNumber": "abc",
+    "clinicName": ""
+  },
+  
+  "testData": {
+    "doctorName": "Test Doctor",
+    "doctorEmail": "test@doctor.com",
+    "contactNumber": "0123456789",
+    "clinicName": "Test Clinic"
+  }
+}
