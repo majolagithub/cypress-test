@@ -5,10 +5,6 @@ import { LoginPageElement } from "../pageElement/LoginPageElement";
 export class LoginPage {
     element = new LoginPageElement();
 
-    // ============================================
-    // NAVIGATION METHODS
-    // ============================================
-
     /**
      * Visits the login page
      * @param {string} url - Login page URL
@@ -42,10 +38,6 @@ export class LoginPage {
         cy.log('✅ All login page elements verified');
     }
 
-    // ============================================
-    // FORM INTERACTION METHODS
-    // ============================================
-
     /**
      * Enters email into the email field
      * @param {string} email - Email address
@@ -64,7 +56,7 @@ export class LoginPage {
           .type(email)
           .should('have.value', email);
         
-        cy.log('✅ Email entered successfully');
+        cy.log('Email entered successfully');
     }
 
     /**
@@ -84,7 +76,7 @@ export class LoginPage {
           .clear()
           .type(password);
         
-        cy.log('✅ Password entered successfully');
+        cy.log('Password entered successfully');
     }
 
     /**
@@ -97,7 +89,7 @@ export class LoginPage {
           .should('be.visible')
           .click();
         
-        cy.log('✅ Password visibility toggled');
+        cy.log('Password visibility toggled');
     }
 
     /**
@@ -111,7 +103,7 @@ export class LoginPage {
           .should('be.enabled')
           .click();
         
-        cy.log('✅ Sign In button clicked');
+        cy.log('Sign In button clicked');
     }
 
     /**
@@ -130,9 +122,6 @@ export class LoginPage {
         cy.log('✅ Navigated to Forgot Password page');
     }
 
-    // ============================================
-    // VALIDATION & VERIFICATION METHODS
-    // ============================================
 
     /**
      * Verifies successful login by checking URL change
@@ -152,7 +141,7 @@ export class LoginPage {
             cy.url().should('include', expectedUrl);
         }
         
-        cy.log(`✅ Login successful - navigated to: ${expectedUrl}`);
+        cy.log(`Login successful - navigated to: ${expectedUrl}`);
     }
 
     /**
@@ -172,11 +161,11 @@ export class LoginPage {
                 bodyText.includes('incorrect') || 
                 bodyText.includes('failed') ||
                 bodyText.includes('error')) {
-                cy.log('✅ Error message found in body text');
+                cy.log('Error message found in body text');
             } else {
                 // Alternative: check if still on login page
                 cy.url().should('include', '/login');
-                cy.log('✅ Login failed - still on login page');
+                cy.log('Login failed - still on login page');
             }
         });
     }
@@ -196,12 +185,9 @@ export class LoginPage {
         // Should still be on login page
         cy.url().should('include', '/login');
         
-        cy.log('✅ Required field validation working');
+        cy.log('Required field validation working');
     }
 
-    // ============================================
-    // COMPLETE LOGIN FLOWS
-    // ============================================
 
     /**
      * Performs login with email and password
@@ -215,7 +201,7 @@ export class LoginPage {
         this.enterPassword(password);
         this.clickSignInButton();
         
-        cy.log('✅ Login form submitted');
+        cy.log('Login form submitted');
     }
 
     /**
