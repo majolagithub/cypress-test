@@ -1,8 +1,8 @@
 export class FormPageElement {
-    selectFacilityDropdown = 'button[role="combobox"]:contains("Select preferred facility")';
+    selectFacilityDropdown = 'button[role="combobox"]';
     selectFacilityDropdownFirst = 'button[role="combobox"]';
-    selectHousingCategoryButton = 'button[role="combobox"]:contains("Choose category")';
-    selectLivingOptionButton = 'button[role="combobox"]:contains("Choose living preference")';
+    selectHousingCategoryButton = 'button[role="combobox"]';
+    selectLivingOptionButton = 'button[role="combobox"]';
     dateOfBirthButton = 'button[aria-haspopup="dialog"]';
 
 
@@ -15,7 +15,6 @@ export class FormPageElement {
 
     fullNames = '#fullNames';
     lastName = '#lastName';
-    dateOfBirth = ':nth-child(1) > .inline-flex';
     idNumberType = '.sm\\:flex-row > :nth-child(1) > .flex';
     idNumber = '#saId';
     emailAddress = '#email';
