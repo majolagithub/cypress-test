@@ -40,13 +40,13 @@ describe('Form Submission Test', () => {
 
 
         //Fill initial selections
-        // cy.log('=== Filling Initial Selections ===');
-        // formPage.fillInitialSelections(
-        //     formData.facilityNameSelection,
-        //     formData.housingCategory,
-        //     formData.livingOption,
-        //     formData.dateOfBirth
-        // );
+        cy.log('=== Filling Initial Selections ===');
+        formPage.fillInitialSelections(
+            formData.facilityNameSelection,
+            formData.housingCategory,
+            formData.livingOption,
+            formData.dateOfBirth
+        );
 
         // Fill Basic Information
         cy.log('=== Filling Basic Information ===');

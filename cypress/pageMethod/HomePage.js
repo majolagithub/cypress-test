@@ -46,24 +46,6 @@ export class HomePage {
     }
 
 
-    // /**
-    //  * Navigates to Events page
-    //  */
-    // visitEventsPage = () => {
-    //     cy.log('Navigating to Events page');
-    //     cy.visit('/en/events');
-    //     cy.url().should('include', '/events');
-    //     cy.log('Events page loaded');
-    // }
 
-    // /**
-    //  * Navigates to Dashboard page
-    //  */
-    // visitDashboardPage = () => {
-    //     cy.log('Navigating to Dashboard page');
-    //     cy.visit('/en/dashboard');
-    //     cy.url().should('include', '/dashboard');
-    //     cy.log('Dashboard page loaded');
-    // }
 }
 

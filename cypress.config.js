@@ -9,7 +9,7 @@ module.exports = defineConfig({
     defaultCommandTimeout: 10000,
     pageLoadTimeout: 30000,
     viewportWidth: 1280,
-    viewportHeight: 720,
+    viewportHeight: 900,
     video: false, //disable video recording
     screenshotOnRunFailure: true,
     chromeWebSecurity: false, //help with redirect issues

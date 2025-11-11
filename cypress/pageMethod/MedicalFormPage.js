@@ -52,7 +52,7 @@ export class MedicalFormPage {
         // Check for form completion status message
         cy.contains('To be completed by your doctor').should('be.visible');
         
-        cy.log('✅ Medical Form page verified');
+        cy.log('Medical Form page verified');
     }
 
     /**
@@ -127,7 +127,7 @@ export class MedicalFormPage {
         this.fillContactNumber(contactNumber);
         this.fillClinicName(clinicName);
         
-        cy.log('✅ Doctor information filled');
+        cy.log('Doctor information filled');
     }
 
     /**
@@ -141,7 +141,7 @@ export class MedicalFormPage {
           .should('be.enabled')
           .click();
         
-        cy.log('✅ Medical form submitted');
+        cy.log('Medical form submitted');
     }
 
     /**
@@ -198,7 +198,7 @@ export class MedicalFormPage {
         this.fillContactNumber(contactNumber);
         this.fillClinicName(clinicName);
         
-        cy.log('✅ Doctor information filled');
+        cy.log('Doctor information filled');
     }
 
     /**
@@ -212,7 +212,7 @@ export class MedicalFormPage {
           .should('be.enabled')
           .click();
         
-        cy.log('✅ Medical form submitted');
+        cy.log('Medical form submitted');
     }
 
     /**

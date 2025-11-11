@@ -1,16 +1,16 @@
 export class FormPageElement {
-    // selectFacilityDropdown = 'button[role="combobox"]:contains("Select preferred facility")';
-    // selectFacilityDropdownFirst = 'button[role="combobox"]';
-    // selectHousingCategoryButton = 'button[role="combobox"]:contains("Choose category")';
-    // selectLivingOptionButton = 'button[role="combobox"]:contains("Choose living preference")';
-    // dateOfBirthButton = 'button[aria-haspopup="dialog"]';
+    selectFacilityDropdown = 'button[role="combobox"]:contains("Select preferred facility")';
+    selectFacilityDropdownFirst = 'button[role="combobox"]';
+    selectHousingCategoryButton = 'button[role="combobox"]:contains("Choose category")';
+    selectLivingOptionButton = 'button[role="combobox"]:contains("Choose living preference")';
+    dateOfBirthButton = 'button[aria-haspopup="dialog"]';
 
 
-    // selectPreferredFacility = '.max-w-3xl > :nth-child(1) > .flex';
-    // selectFaciliyName = '.max-w-3xl > :nth-child(1) > .font-medium';
-    // selectHousingCategory = '.max-w-3xl > .flex-col > :nth-child(1) > .flex';
-    // selectLivingOption = '.max-w-3xl > .flex-col > :nth-child(2) > .flex';
-    // dateOfBirth = ':nth-child(1) > .inline-flex';
+    selectPreferredFacility = '.max-w-3xl > :nth-child(1) > .flex';
+    selectFaciliyName = '.max-w-3xl > :nth-child(1) > .font-medium';
+    selectHousingCategory = '.max-w-3xl > .flex-col > :nth-child(1) > .flex';
+    selectLivingOption = '.max-w-3xl > .flex-col > :nth-child(2) > .flex';
+    dateOfBirth = ':nth-child(1) > .inline-flex';
 
 
     fullNames = '#fullNames';

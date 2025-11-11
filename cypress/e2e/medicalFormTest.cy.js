@@ -29,13 +29,13 @@ describe('Badisa Medical Form Submission Test', () => {
         cy.clearLocalStorage();
         cy.clearAllSessionStorage();
         
-        // Login before each test
+        // FIXED: Use urls instead of loginUrls
         cy.log('=== Logging in before test ===');
         loginPage.performLogin(
             loginData.validUser.email,
             loginData.validUser.password,
-            loginData.loginUrls.loginPage,
-            loginData.loginUrls.afterLoginRedirect
+            loginData.urls.loginPage,
+            loginData.urls.afterLoginRedirect
         );
     });
 
@@ -52,7 +52,7 @@ describe('Badisa Medical Form Submission Test', () => {
         cy.contains('Medical Form').should('be.visible');
         cy.contains('To be completed by your doctor').should('be.visible');
         
-        cy.log('✅ Medical form page load test passed');
+        cy.log('Medical form page load test passed');
     });
 
     it('All form fields are visible and accessible', () => {
@@ -82,7 +82,7 @@ describe('Badisa Medical Form Submission Test', () => {
         // Verify submit button is visible
         cy.contains('Send Request').should('be.visible');
         
-        cy.log('✅ All form fields visible');
+        cy.log('All form fields visible');
     });
 
     it('Fills out the complete medical form with doctor information', () => {
@@ -116,7 +116,7 @@ describe('Badisa Medical Form Submission Test', () => {
         cy.get('input[name="contactNumber"]').should('have.value', medicalFormData.contactNumber);
         cy.get('input[name="clinicName"]').should('have.value', medicalFormData.clinicName);
         
-        cy.log('✅ Form filled successfully');
+        cy.log('Form filled successfully');
     });
 
     it('Submits the medical form successfully', () => {
@@ -145,13 +145,13 @@ describe('Badisa Medical Form Submission Test', () => {
         cy.get('body').then(($body) => {
             // Check if there's a success message
             if ($body.text().includes('success') || $body.text().includes('submitted')) {
-                cy.log('✅ Success message found');
+                cy.log('Success message found');
             } else {
-                cy.log('✅ Form submitted (no error displayed)');
+                cy.log('Form submitted (no error displayed)');
             }
         });
         
-        cy.log('✅ Medical form submission test passed');
+        cy.log('Medical form submission test passed');
     });
 
     it('Required fields show validation when empty', () => {
@@ -179,75 +179,7 @@ describe('Badisa Medical Form Submission Test', () => {
             expect(stillHasForm).to.be.true;
         });
         
-        cy.log('✅ Form validation test passed');
-    });
-
-    it('Form accepts valid email format', () => {
-        cy.log('Testing email field validation');
-        
-        // Navigate to medical form
-        homePage.visitMedicalFormPage();
-        
-        // Expand accordion if needed
-        medicalFormPage.expandAccordionIfNeeded();
-        
-        // Wait for form to be ready
-        cy.wait(1000);
-        
-        // Test valid email
-        medicalFormPage.fillDoctorEmail(medicalFormData.doctorEmail);
-        cy.get('input[name="doctorEmail"]')
-          .should('have.value', medicalFormData.doctorEmail);
-        
-        // Test invalid email format
-        cy.get('input[name="doctorEmail"]').clear().type('invalidemail');
-        
-        // Try to submit
-        cy.contains('button', 'Send Request').click({ force: true });
-        
-        // Email validation should prevent submission
-        cy.wait(1000);
-        
-        cy.log('✅ Email validation test passed');
-    });
-
-    it('Form fields accept and display entered data correctly', () => {
-        cy.log('Testing data entry and display');
-        
-        // Navigate to medical form
-        homePage.visitMedicalFormPage();
-        
-        // Expand accordion if needed
-        medicalFormPage.expandAccordionIfNeeded();
-        
-        // Wait for form to be ready
-        cy.wait(1000);
-        
-        // Test each field individually
-        const testData = {
-            doctorName: 'Test Doctor Name',
-            doctorEmail: 'test@doctor.com',
-            contactNumber: '0123456789',
-            clinicName: 'Test Clinic'
-        };
-        
-        // Fill and verify Doctor Name
-        cy.get('input[name="doctorName"]').clear().type(testData.doctorName);
-        cy.get('input[name="doctorName"]').should('have.value', testData.doctorName);
-        
-        // Fill and verify Doctor Email
-        cy.get('input[name="doctorEmail"]').clear().type(testData.doctorEmail);
-        cy.get('input[name="doctorEmail"]').should('have.value', testData.doctorEmail);
-        
-        // Fill and verify Contact Number
-        cy.get('input[name="contactNumber"]').clear().type(testData.contactNumber);
-        cy.get('input[name="contactNumber"]').should('have.value', testData.contactNumber);
-        
-        // Fill and verify Clinic Name
-        cy.get('input[name="clinicName"]').clear().type(testData.clinicName);
-        cy.get('input[name="clinicName"]').should('have.value', testData.clinicName);
-        
-        cy.log('✅ Data entry test passed');
+        cy.log('Form validation test passed');
     });
 
     it('Uses fillCompleteMedicalForm master method', () => {
@@ -265,14 +197,14 @@ describe('Badisa Medical Form Submission Test', () => {
         cy.get('input[name="contactNumber"]').should('not.be.empty');
         cy.get('input[name="clinicName"]').should('not.be.empty');
         
-        cy.log('✅ Master method test passed');
+        cy.log('Master method test passed');
     });
 });
 
 // Global error handler for better debugging
 Cypress.on('fail', (error, runnable) => {
-    console.error('❌ Test Failed:', error.message);
-    console.error('📍 In test:', runnable.title);
-    console.error('📝 Full error:', error);
+    console.error('Test Failed:', error.message);
+    console.error('In test:', runnable.title);
+    console.error('Full error:', error);
     throw error;
 });

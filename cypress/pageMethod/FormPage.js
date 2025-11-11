@@ -4,110 +4,116 @@ import { FormPageElement } from "../pageElement/FormPageElement";
 export class FormPage {
     element = new FormPageElement();
 
-    // /**
-    //  * Selects a facility from the dropdown
-    //  * @param {string} facilityName - Name of the facility (e.g., "Ons Huis (Citrusdal)")
-    //  */
-    // selectFacilityByName = (facilityName) => {
-    //     cy.log(`Selecting facility: ${facilityName}`);
+    /**
+     * Selects a facility from the dropdown
+     * @param {string} facilityName - Name of the facility (e.g., "Ons Huis (Citrusdal)")
+     */
+    selectFacilityByName = (facilityName) => {
+        cy.log(`Selecting facility: ${facilityName}`);
         
-    //     // Click the FIRST combobox dropdown (facility dropdown)
-    //     cy.get('button[role="combobox"]', { timeout: 10000 })
-    //     .first()  //Get only the first one
-    //     .should('be.visible')
-    //     .click();
-    //     // Wait for dropdown to open
-    //     cy.wait(500);
+        // Click the FIRST combobox dropdown (facility dropdown)
+        cy.get('button[role="combobox"]', { timeout: 10000 })
+            .first()
+            .should('be.visible')
+            .click();
         
-    //     // Click the option with the facility name
-    //     cy.contains(facilityName, { timeout: 10000 })
-    //     .should('be.visible')
-    //     .click({ force: true });       
-    //     cy.log(`Selected facility: ${facilityName}`);
-    // }
-
-    // /**
-    //  * Selects housing category from dropdown
-    //  * @param {string} category - Text to display (e.g., "Room or Shared Room Housing")
-    //  */
-    // selectHousingCategory = (categoryText) => {
-    //     cy.log(`Selecting housing category: ${categoryText}`);
+        // Wait for dropdown to open AND options to load
+        cy.wait(500);
         
-    //     // Click the second combobox (housing category)
-    //     cy.get('button[role="combobox"]', { timeout: 10000 })
-    //     .eq(1)  //Get the second combobox (index 1)
-    //     .should('be.visible')
-    //     .click();
+        // ✅ BETTER: Wait for the dropdown container to be visible
+        cy.get('[role="listbox"], [role="menu"], .dropdown-content', { timeout: 10000 })
+            .should('be.visible');
         
-    //     // Wait for dropdown to open
-    //     cy.wait(500);
-        
-    //     // Click the option
-    //     cy.contains(categoryText, { timeout: 10000 })
-    //     .should('be.visible')
-    //     .click({ force: true });
-        
-    //     cy.log(`Selected housing category: ${categoryText}`);
-    // }
-
-    // /**
-    //  * Selects living option from dropdown
-    //  * @param {string} optionText - Text to display (e.g., "Purchase Living Right")
-    //  */
-    // selectLivingOptionByValue = (optionText) => {
-    //     cy.log(`Selecting living option: ${optionText}`);
-
-    //     // Wait until the 3rd combobox exists and is enabled
-    //     cy.get('button[role="combobox"]', { timeout: 20000 })
-    //     .eq(2)
-    //     .should('exist')
-    //     .should('not.be.disabled')
-    //     .should('be.visible')
-    //     .click({ force: true }); // Force click as fallback
-
-    //     // Wait for dropdown to open
-    //     cy.wait(800);
-
-    //     // Select the desired option
-    //     cy.contains(optionText, { timeout: 20000 })
-    //     .should('be.visible')
-    //     .click({ force: true });
-
-    //     cy.log(`Selected living option: ${optionText}`);
-    // };
-
-    // /**
-    //  * Sets date of birth by typing into input
-    //  * @param {string} dateString - Date in format "DD/MM/YYYY"
-    //  */
-    // setDateOfBirth = (dateString) => {
-    //     cy.log(`Setting date of birth: ${dateString}`);
-        
-    //     // Click the date button to activate the input
-    //     cy.get('button[aria-haspopup="dialog"]', { timeout: 10000 })
-    //     .should('be.visible')
-    //     .click();
-    //     cy.wait(300);        
-
-    //     // Type the date directly if there's an input field
-    //     cy.get('input[placeholder*="Select date"]')
-    //     .clear()
-    //     .type(dateString);
-    //     cy.get('body').type('{esc}');        
-    //     cy.log(`Date of birth set: ${dateString}`);
-    // }
-
+        // Click the option with the facility name
+        cy.contains(facilityName, { timeout: 10000 })
+            .should('be.visible')
+            .click({ force: true });
+            
+        cy.log(`Selected facility: ${facilityName}`);
+    }
     
-    // fillInitialSelections = (facilityName, housingCategory, livingOption, dateOfBirth) => {
-    //     cy.log('=== Filling Initial Form Selections ===');
+    /**
+     * Selects housing category from dropdown
+     * @param {string} category - Text to display (e.g., "Room or Shared Room Housing")
+     */
+    selectHousingCategory = (categoryText) => {
+        cy.log(`Selecting housing category: ${categoryText}`);
+        
+        // Click the second combobox (housing category)
+        cy.get('button[role="combobox"]', { timeout: 10000 })
+        .eq(1)  //Get the second combobox (index 1)
+        .should('be.visible')
+        .click();
+        
+        // Wait for dropdown to open
+        cy.wait(500);
+        
+        // Click the option
+        cy.contains(categoryText, { timeout: 10000 })
+        .should('be.visible')
+        .click({ force: true });
+        
+        cy.log(`Selected housing category: ${categoryText}`);
+    }
 
-    //     if (facilityName) this.selectFacilityByName(facilityName);
-    //     if (housingCategory) this.selectHousingCategory(housingCategory);
-    //     if (livingOption) this.selectLivingOptionByValue(livingOption);
-    //     if (dateOfBirth) this.setDateOfBirth(dateOfBirth);
+    /**
+     * Selects living option from dropdown
+     * @param {string} optionText - Text to display (e.g., "Purchase Living Right")
+     */
+    selectLivingOptionByValue = (optionText) => {
+        cy.log(`Selecting living option: ${optionText}`);
 
-    //     cy.log('Initial selections complete');
-    // }
+        // Wait until the 3rd combobox exists and is enabled
+        cy.get('button[role="combobox"]', { timeout: 20000 })
+        .eq(2)
+        .should('exist')
+        .should('not.be.disabled')
+        .should('be.visible')
+        .click({ force: true }); // Force click as fallback
+
+        // Wait for dropdown to open
+        cy.wait(800);
+
+        // Select the desired option
+        cy.contains(optionText, { timeout: 20000 })
+        .should('be.visible')
+        .click({ force: true });
+
+        cy.log(`Selected living option: ${optionText}`);
+    };
+
+    /**
+     * Sets date of birth by typing into input
+     * @param {string} dateString - Date in format "DD/MM/YYYY"
+     */
+    setDateOfBirth = (dateString) => {
+        cy.log(`Setting date of birth: ${dateString}`);
+        
+        // Click the date button to activate the input
+        cy.get('button[aria-haspopup="dialog"]', { timeout: 10000 })
+        .should('be.visible')
+        .click();
+        cy.wait(300);        
+
+        // Type the date directly if there's an input field
+        cy.get('input[placeholder*="Select date"]')
+        .clear()
+        .type(dateString);
+        cy.get('body').type('{esc}');        
+        cy.log(`Date of birth set: ${dateString}`);
+    }
+
+    // FIXED: Removed duplicate fillInitialSelections
+    fillInitialSelections = (facilityName, housingCategory, livingOption, dateOfBirth) => {
+        cy.log('=== Filling Initial Form Selections ===');
+
+        if (facilityName) this.selectFacilityByName(facilityName);
+        if (housingCategory) this.selectHousingCategory(housingCategory);
+        if (livingOption) this.selectLivingOptionByValue(livingOption);
+        if (dateOfBirth) this.setDateOfBirth(dateOfBirth);
+
+        cy.log('Initial selections complete');
+    }
 
     enterTextField = (element, fieldValue) => {
         if (fieldValue === undefined || fieldValue === null) {
@@ -165,6 +171,10 @@ export class FormPage {
     }
 
     fillFormData = (
+        facilityName, 
+        housingCategory, 
+        livingOption, 
+        dateOfBirth,
         fullNames,
         lastName,
         idNumber,
@@ -182,6 +192,7 @@ export class FormPage {
         address1,
         hospitalName
     ) => {
+        this.fillInitialSelections(facilityName, housingCategory, livingOption, dateOfBirth);
         this.fillBasicInfo(fullNames, lastName, idNumber, email, phoneNumberOwn, phoneNumberChild, address, postalCode);
         this.fillDemographics(homeLanguage, religion, occupation);
         this.fillFuneralDetails(name, phoneNumber, referenceNumber, address1);

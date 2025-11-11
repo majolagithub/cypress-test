@@ -25,11 +25,11 @@
     "description": "Invalid email format"
   },
   "urls": {
-    "loginPage": "https://app.mybadisa.org/en/login",
+    "loginPage": "https://app.mybadisa.org/en/auth/signin",
     "forgotPasswordPage": "https://app.mybadisa.org/en/auth/forgot-password",
-    "afterLoginRedirect": "/waitlist",
-    "dashboardPage": "/dashboard",
-    "medicalFormPage": "/medical-form"
+    "afterLoginRedirect": "/en/waitlist",
+    "dashboardPage": "/en/dashboard",
+    "medicalFormPage": "en//medical-form"
   },
   "testScenarios": {
     "sqlInjection": {
