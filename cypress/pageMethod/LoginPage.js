@@ -19,7 +19,7 @@ export class LoginPage {
         // Verify form is visible
         cy.get(this.element.emailInput, { timeout: 10000 }).should('be.visible');
         
-        cy.log('✅ Login page loaded successfully');
+        cy.log('Login page loaded successfully');
     }
 
     /**
@@ -35,7 +35,7 @@ export class LoginPage {
         cy.get(this.element.signInButton).should('be.visible');
         cy.get(this.element.forgotPasswordLink).should('be.visible');
         
-        cy.log('✅ All login page elements verified');
+        cy.log('All login page elements verified');
     }
 
     /**
@@ -119,7 +119,7 @@ export class LoginPage {
         // Verify navigation to forgot password page
         cy.url({ timeout: 10000 }).should('include', '/forgot-password');
         
-        cy.log('✅ Navigated to Forgot Password page');
+        cy.log('Navigated to Forgot Password page');
     }
 
 

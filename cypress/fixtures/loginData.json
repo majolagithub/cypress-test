@@ -1,16 +1,16 @@
 {
   "validUser": {
     "email": "majolathabiso657@gmail.com",
-    "password": "Badisa123",
+    "password": "Badisa123@",
     "description": "Main test user account"
   },
   "alternativeUser": {
-    "email": "testuser@example.com",
+    "email": "testuser@gmail.com",
     "password": "TestPass123!",
     "description": "Alternative test account"
   },
   "invalidUser": {
-    "email": "invalid@example.com",
+    "email": "invalid@gmail.com",
     "password": "WrongPassword123",
     "description": "Invalid credentials for negative testing"
   },
